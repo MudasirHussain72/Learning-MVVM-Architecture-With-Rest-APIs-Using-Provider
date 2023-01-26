@@ -5,6 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Utils {
+  static void fielsFocusChange(
+      BuildContext context, FocusNode current, FocusNode nestFocus) {
+    current.unfocus();
+    FocusScope.of(context).requestFocus(nestFocus);
+  }
+
   static toastMessage(String message) {
     Fluttertoast.showToast(msg: message);
   }
