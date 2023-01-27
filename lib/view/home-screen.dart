@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Center(
       child: InkWell(
           onTap: () => Navigator.pushNamed(context, RoutesName.login),
-          child: Text("go to login screen")),
+          child: Text("logout")),
     ));
   }
 }

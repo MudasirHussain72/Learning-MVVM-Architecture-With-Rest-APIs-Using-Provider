@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mvvm/res/components/round_button.dart';
 import 'package:mvvm/utils/routes/routes_name.dart';
@@ -6,14 +5,14 @@ import 'package:mvvm/utils/utils.dart';
 import 'package:mvvm/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class SignUpView extends StatefulWidget {
+  const SignUpView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<SignUpView> createState() => _SignUpViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _SignUpViewState extends State<SignUpView> {
   ValueNotifier<bool> _obsecurePassword = ValueNotifier<bool>(true);
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -35,7 +34,7 @@ class _LoginViewState extends State<LoginView> {
     final authViewModel = Provider.of<AuthViewModel>(context);
     final height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
-        appBar: AppBar(title: Text("Login"), centerTitle: true),
+        appBar: AppBar(title: Text("SignUp"), centerTitle: true),
         body: SafeArea(
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -78,8 +77,8 @@ class _LoginViewState extends State<LoginView> {
               ),
               SizedBox(height: height * .085),
               RoundButton(
-                title: "Login",
-                loading: authViewModel.loading,
+                title: "Sign Up",
+                loading: authViewModel.signUpLoading,
                 onPress: () {
                   if (_emailController.text.isEmpty &&
                       _passwordController.text.isEmpty) {
@@ -95,7 +94,7 @@ class _LoginViewState extends State<LoginView> {
                       'email': _emailController.text.trim().toString(),
                       'password': _passwordController.text.trim().toString(),
                     };
-                    authViewModel.loginApi(data, context);
+                    authViewModel.registerApi(data, context);
                     print("Apis Hit");
                   }
                 },
@@ -103,9 +102,9 @@ class _LoginViewState extends State<LoginView> {
               SizedBox(height: height * .02),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, RoutesName.signUp);
+                  Navigator.pushNamed(context, RoutesName.login);
                 },
-                child: Text("Dont have an account? Sign Up"),
+                child: Text("Already have an account? Login"),
               ),
             ],
           ),
